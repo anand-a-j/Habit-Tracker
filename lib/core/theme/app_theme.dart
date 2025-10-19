@@ -20,6 +20,11 @@ class AppThemes with AppColorScheme {
         ),
         fontFamily: "Inter",
         textTheme: const TextTheme(
+           titleLarge: TextStyle(
+            fontSize: 24,
+            color: AppColorScheme.onPrimary,
+            fontWeight: FontWeight.w500,
+          ),
           titleMedium: TextStyle(
             fontSize: 20,
             color: AppColorScheme.onPrimary,

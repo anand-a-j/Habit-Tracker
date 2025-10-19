@@ -8,6 +8,7 @@ class AppConsts {
   static const double rMacro = 8.0;
   static const double rSmall = 10.0;
   static const double rMedium = 12.0;
+    static const double rCircle = 50.0;
 
   // Padding
   static const double pMicro = 5;
