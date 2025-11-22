@@ -46,7 +46,7 @@ class _HabitAddScreenState extends ConsumerState<HabitAddScreen> {
 
   final ValueNotifier<bool> _isReminderOn = ValueNotifier(false);
   final ValueNotifier<TimeOfDay> _reminderTime =
-      ValueNotifier(TimeOfDay(hour: 20, minute: 0));
+      ValueNotifier(const TimeOfDay(hour: 20, minute: 0));
   final ValueNotifier<List<Weekday>> _reminderDays =
       ValueNotifier(List<Weekday>.from(Weekday.values));
 
@@ -114,9 +114,8 @@ class _HabitAddScreenState extends ConsumerState<HabitAddScreen> {
                 hintText: nameYourHabit,
                 focusNode: _nameFocusNode,
                 textInputType: TextInputType.name,
-                validator: (value) => InputVaildator.required(
+                validator: (value) => InputVaildator.requiredHabitName(
                   value,
-                  fieldName: nameEn,
                 ),
               ),
               const SizedBox(height: AppConsts.pMedium),

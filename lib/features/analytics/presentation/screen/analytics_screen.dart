@@ -7,8 +7,6 @@ import 'package:habitroot/core/constants/constants.dart';
 import 'package:habitroot/core/extension/common.dart';
 import 'package:habitroot/features/analytics/presentation/utils/stats_utils.dart';
 import 'package:habitroot/features/analytics/presentation/widgets/overall_info_card.dart';
-import 'package:habitroot/features/analytics/presentation/widgets/strength_line_chart.dart';
-import 'package:habitroot/features/calendar/presentation/habitroot_month_calendar.dart';
 
 import '../../../../core/components/core_components.dart';
 import '../../../habit/domain/habit.dart';
@@ -19,8 +17,8 @@ import '../widgets/strength_card.dart';
 class AnalyticsScreen extends ConsumerWidget {
   const AnalyticsScreen({
     this.habit,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// If [habit] is null, show overall analytics; otherwise show single habit analytics.
   final Habit? habit;
@@ -46,6 +44,34 @@ class AnalyticsScreen extends ConsumerWidget {
       appBar: HabitRootAppBar(
         leadingOnTap: () => context.pop(),
         title: analyticsEn,
+        actions: [
+          Container(
+            margin: const EdgeInsets.symmetric(
+              vertical: 15,
+            ),
+            padding: const EdgeInsets.symmetric(
+              // vertical: 6,
+              horizontal: 12,
+            ),
+            decoration: BoxDecoration(
+              color: context.onSecondary,
+              borderRadius: BorderRadius.circular(AppConsts.rCircle),
+              border: Border.all(
+                width: 1,
+                color: context.onSecondaryContainer,
+              ),
+            ),
+            child: Center(
+              child: Text(
+                "60 Days",
+                style: context.bodySmall?.copyWith(
+                  color: context.onPrimary,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: AppConsts.pSide)
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.only(
@@ -124,4 +150,3 @@ class AnalyticsScreen extends ConsumerWidget {
     );
   }
 }
-

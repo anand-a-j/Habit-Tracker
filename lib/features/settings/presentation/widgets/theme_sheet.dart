@@ -13,7 +13,7 @@ void showThemeBottomSheet(BuildContext context) {
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
-    backgroundColor: context.secondaryFixed,
+    backgroundColor: context.secondary,
     isScrollControlled: true,
     builder: (context) => const ThemeBottomSheet(),
   );

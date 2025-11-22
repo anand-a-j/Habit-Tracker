@@ -11,7 +11,7 @@ class StatsUtils {
     double totalStrength = 0;
 
     for (final habit in habits) {
-      final past30Days = now.subtract(Duration(days: 30));
+      final past30Days = now.subtract(const Duration(days: 60));
 
       final recentCompletions =
           habit.completedDates.where((d) => d.isAfter(past30Days)).length;
@@ -47,7 +47,7 @@ class StatsUtils {
     if (habits.isEmpty) return 0.0;
 
     final now = DateTime.now();
-    final startDate = now.subtract(Duration(days: 30));
+    final startDate = now.subtract(const Duration(days: 60));
 
     final Set<DateTime> uniqueDays = {};
 
@@ -79,7 +79,7 @@ class StatsUtils {
 
     while (allDays.contains(DateTime(day.year, day.month, day.day))) {
       streak++;
-      day = day.subtract(Duration(days: 1));
+      day = day.subtract(const Duration(days: 1));
     }
 
     return streak;
@@ -157,16 +157,4 @@ class StatsUtils {
 
     return DateEvent.normal;
   }
-
-  // static DateEvent _mapCountToEvent(int count, int maxCount) {
-  //   if (count <= 0) return DateEvent.normal;
-
-  //   // If you want fixed thresholds instead of scaling
-  //   if (count == 1) return DateEvent.low;
-  //   if (count == 2) return DateEvent.medium;
-  //   if (count == 3) return DateEvent.high;
-  //   if (count >= 4) return DateEvent.veryHigh;
-
-  //   return DateEvent.normal;
-  // }
 }

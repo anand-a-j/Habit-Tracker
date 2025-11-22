@@ -1,7 +1,7 @@
 class InputVaildator {
-  static String? required(String? value, {String fieldName = 'This field'}) {
+  static String? requiredHabitName(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return '$fieldName is required';
+      return 'Name can’t be empty';
     }
     return null;
   }

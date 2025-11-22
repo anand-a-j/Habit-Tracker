@@ -59,7 +59,7 @@ class StrengthLineChart extends StatelessWidget {
                   final date = indexToDate[index];
                   if (date == null) return const SizedBox.shrink();
 
-                  final label = DateFormat.MMMd().format(date); // e.g. Jul 12
+                  final label = DateFormat.MMMd().format(date); 
                   return SideTitleWidget(
                     meta: meta,
                     child: Text(

@@ -82,7 +82,7 @@ class HabitRootTextField extends StatelessWidget {
             ? const TextStyle(fontSize: 0.01)
             : TextStyle(
                 fontSize: 10,
-                color: context.primary,
+                color: context.error,
                 fontWeight: FontWeight.w300,
               ),
         border: OutlineInputBorder(

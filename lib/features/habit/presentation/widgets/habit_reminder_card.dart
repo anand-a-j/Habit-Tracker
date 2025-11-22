@@ -51,7 +51,6 @@ class _HabitReminderCardState extends State<HabitReminderCard>
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
@@ -92,8 +91,8 @@ class _HabitReminderCardState extends State<HabitReminderCard>
                       child: CupertinoSwitch(
                         value: isOn,
                         onChanged: (value) async {
-                          final granted =
-                              await NotificationService.requestNotificationPermission();
+                          final granted = await NotificationService
+                              .requestNotificationPermission();
 
                           if (granted) {
                             _isReminderOn.value = value;
@@ -122,46 +121,75 @@ class _HabitReminderCardState extends State<HabitReminderCard>
                         onTap: () async {
                           showModalBottomSheet(
                             context: context,
-                            backgroundColor: context.onSecondary,
+                            backgroundColor: context.secondary,
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(16)),
+                                top: Radius.circular(16),
+                              ),
                             ),
                             builder: (context) {
                               TimeOfDay tempTime = _selectedTime.value;
 
                               return SizedBox(
-                                height: 250,
+                                height: 300,
                                 child: Column(
                                   children: [
-                                    Expanded(
-                                      child: CupertinoDatePicker(
-                                        mode: CupertinoDatePickerMode.time,
-                                        initialDateTime: DateTime(
-                                          0,
-                                          0,
-                                          0,
-                                          _selectedTime.value.hour,
-                                          _selectedTime.value.minute,
+                                    CupertinoTheme(
+                                      data: CupertinoTheme.of(context).copyWith(
+                                        brightness:
+                                            Theme.of(context).brightness,
+                                        primaryColor: context.primary,
+                                        textTheme: CupertinoTextThemeData(
+                                          dateTimePickerTextStyle:
+                                              context.titleMedium?.copyWith(
+                                            color: context.onPrimary,
+                                          ),
                                         ),
-                                        use24hFormat: false,
-                                        onDateTimeChanged:
-                                            (DateTime newDateTime) {
-                                          tempTime = TimeOfDay(
-                                            hour: newDateTime.hour,
-                                            minute: newDateTime.minute,
-                                          );
-                                        },
+                                      ),
+                                      child: Expanded(
+                                        child: CupertinoDatePicker(
+                                          mode: CupertinoDatePickerMode.time,
+                                          initialDateTime: DateTime(
+                                            0,
+                                            0,
+                                            0,
+                                            _selectedTime.value.hour,
+                                            _selectedTime.value.minute,
+                                          ),
+                                          use24hFormat: false,
+                                          onDateTimeChanged:
+                                              (DateTime newDateTime) {
+                                            tempTime = TimeOfDay(
+                                              hour: newDateTime.hour,
+                                              minute: newDateTime.minute,
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ),
-                                    CupertinoButton(
-                                      child: const Text("Done"),
+
+                                    HabitRootButton(
+                                      label: "Done",
+                                      padding: const EdgeInsets.only(
+                                        top: 10,
+                                        bottom: 10,
+                                        left: AppConsts.pSide,
+                                        right: AppConsts.pSide,
+                                      ),
                                       onPressed: () {
                                         _selectedTime.value = tempTime;
                                         widget.onTimeChanged(tempTime);
                                         Navigator.of(context).pop();
                                       },
                                     ),
+                                    // CupertinoButton(
+                                    //   child: const Text("Done"),
+                                    //   onPressed: () {
+                                    //     _selectedTime.value = tempTime;
+                                    //     widget.onTimeChanged(tempTime);
+                                    //     Navigator.of(context).pop();
+                                    //   },
+                                    // ),
                                   ],
                                 ),
                               );
@@ -173,7 +201,7 @@ class _HabitReminderCardState extends State<HabitReminderCard>
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: context.secondary,
+                            color: context.secondaryContainer,
                           ),
                           child: Center(
                             child: Row(
@@ -206,7 +234,8 @@ class _HabitReminderCardState extends State<HabitReminderCard>
                         ),
                       )
                     ],
-                  )
+                  ),
+                  const SizedBox(height: 5),
                 ]
               ],
             ),

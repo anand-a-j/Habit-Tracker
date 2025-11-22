@@ -26,25 +26,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-        valueListenable: settings.listenable(
-          keys: [
-            themeModeKey,
-          ],
-        ),
-        builder: (context, value, child) {
-          final ThemeMode themeMode = ThemeMode.values[value.get(
-            themeModeKey,
-            defaultValue: 0,
-          )];
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            //
-            routerConfig: router,
-            themeMode: themeMode,
-            scaffoldMessengerKey: Snack.messengerKey,
-            title: AppConsts.appName,
-            darkTheme: AppThemes.darkThemeData(context),
-          );
-        });
+      valueListenable: settings.listenable(
+        keys: [
+          themeModeKey,
+        ],
+      ),
+      builder: (context, value, child) {
+        final ThemeMode themeMode = ThemeMode.values[value.get(
+          themeModeKey,
+          defaultValue: 0,
+        )];
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          //
+          routerConfig: router,
+          themeMode: themeMode,
+          scaffoldMessengerKey: Snack.messengerKey,
+          title: AppConsts.appName,
+          darkTheme: AppThemes.darkThemeData(context),
+        );
+      },
+    );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 mixin AppColorScheme {
   // static const Color primary = Color(0XFF33C75A); //  Green
-  static const Color primary = Color(0XFF4CAF84); // Muted Sage Green
+  static const Color primary = Color(0XFF6FBF73); // Muted Sage Green
   static const Color onPrimary = Color(0XFFFFFFFF); //  Pure White
 
   static const Color secondary = Color(0XFF000000); // Pure Black

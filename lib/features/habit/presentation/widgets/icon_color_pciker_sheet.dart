@@ -16,7 +16,7 @@ Future<int> showColorPicker(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
-    backgroundColor: AppColorScheme.secondaryContainer,
+    backgroundColor: AppColorScheme.onSecondary,
     isScrollControlled: true,
     builder: (context) => _IconColorPickerBody(initialColor: initialColor),
   );

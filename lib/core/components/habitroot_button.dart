@@ -19,9 +19,17 @@ class HabitRootButton extends StatelessWidget {
     return Padding(
       padding: padding,
       child: SizedBox(
-        height: 56,
+        height: 49,
         width: double.infinity,
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            foregroundColor: Theme.of(context).colorScheme.onPrimary,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
           onPressed: () {
             HapticFeedback.lightImpact();
             onPressed();
