@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habitroot/features/home/presentation/screen/dashboard_screen.dart';
 import 'package:habitroot/features/settings/presentation/screen/general_screen.dart';
+import 'package:habitroot/features/settings/presentation/screen/import_export_screen.dart';
 import 'package:habitroot/features/settings/presentation/screen/reorder_screen.dart';
 import 'package:habitroot/features/settings/presentation/screen/settings_screen.dart';
 import 'package:habitroot/features/splash/splash_screen.dart';
@@ -102,6 +103,17 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) {
         return SlideTransitionPage(
           page: const GeneralScreen(),
+          beginOffset: const Offset(0, 1),
+        );
+      },
+    ),
+
+      GoRoute(
+      name: 'import-export-screen',
+      path: '/import-export',
+      pageBuilder: (context, state) {
+        return SlideTransitionPage(
+          page: const ImportExportScreen(),
           beginOffset: const Offset(0, 1),
         );
       },

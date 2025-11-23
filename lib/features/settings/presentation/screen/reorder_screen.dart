@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habitroot/core/components/core_components.dart';
 import 'package:habitroot/core/constants/app_constants.dart';
+import 'package:habitroot/core/extension/color_extension.dart';
+import 'package:habitroot/core/extension/common.dart';
 import 'package:habitroot/features/settings/presentation/widgets/reorder_card.dart';
 
 import '../../../../core/constants/strings.dart';
@@ -38,27 +40,55 @@ class _ReorderScreenState extends ConsumerState<ReorderScreen> {
         padding: const EdgeInsets.symmetric(horizontal: AppConsts.pSide),
         child: _localHabits.isEmpty
             ? const Center(child: Text('No habits found.'))
-            : ReorderableListView(
-                onReorder: (oldIndex, newIndex) {
-    
-                  if (newIndex > oldIndex) newIndex -= 1;
-                  final moved = _localHabits.removeAt(oldIndex);
-                  _localHabits.insert(newIndex, moved);
-                  setState(() {});
-
-                  ref.read(habitProvider.notifier).reorderHabits(
-                        _localHabits,
-                        oldIndex,
-                        newIndex,
-                      );
-                },
-                proxyDecorator: (child, index, animation) => Material(
-                  type: MaterialType.transparency,
-                  child: child,
-                ),
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  for (final habit in _localHabits)
-                    ReorderCard(key: ValueKey(habit.id), habit: habit),
+                  const SizedBox(height: 5),
+                  Row(
+                    spacing: 8,
+                    children: [
+                      Icon(
+                        Icons.info_outline_rounded,
+                        color: context.onPrimary.withValues(
+                          alpha: 0.65,
+                        ),
+                        size: 18,
+                        grade: -25,
+                      ),
+                      Text(
+                        "Hold and drag to rearrange habits",
+                        style: context.bodyMedium?.copyWith(
+                          color: context.onPrimary.withValues(
+                            alpha: 0.65,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: ReorderableListView(
+                      onReorder: (oldIndex, newIndex) {
+                        if (newIndex > oldIndex) newIndex -= 1;
+                        final moved = _localHabits.removeAt(oldIndex);
+                        _localHabits.insert(newIndex, moved);
+                        setState(() {});
+
+                        ref.read(habitProvider.notifier).reorderHabits(
+                              _localHabits,
+                            );
+                        // log("Habit name : ${_localHabits.}");
+                      },
+                      proxyDecorator: (child, index, animation) => Material(
+                        type: MaterialType.transparency,
+                        child: child,
+                      ),
+                      children: [
+                        for (final habit in _localHabits)
+                          ReorderCard(key: ValueKey(habit.id), habit: habit),
+                      ],
+                    ),
+                  ),
                 ],
               ),
       ),

@@ -33,13 +33,13 @@ class HabitMarkButton extends ConsumerWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         curve: Curves.easeInOut,
-        width: 40,
-        height: 40,
+        width: 43,
+        height: 43,
         decoration: BoxDecoration(
           color: isCompletedToday
               ? backgroundColor
               : backgroundColor.withValues(alpha: 0.2),
-          borderRadius: BorderRadius.circular(AppConsts.rMacro),
+          borderRadius: BorderRadius.circular(6),
         ),
         child: const Center(
           child: SvgBuild(assetImage: Assets.tick),

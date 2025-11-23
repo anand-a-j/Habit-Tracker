@@ -24,4 +24,6 @@ class Assets {
   static const String analytics = "$_baseUrl/analytics.svg";
   static const String clockPlus = "$_baseUrl/clock-plus.svg";
   static const String theme = "$_baseUrl/theme.svg";
- }
+  static const String import = "$_baseUrl/file-down.svg";
+  static const String export = "$_baseUrl/file-up.svg";
+}

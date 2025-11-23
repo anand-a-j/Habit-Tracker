@@ -24,17 +24,18 @@ class SettingsScreen extends StatelessWidget {
         children: [
           const SizedBox(height: AppConsts.pLarge),
 
-          SettingsCard(
-            leadingIcon: Assets.settings,
-            title: generalEn,
-            isFirst: true,
-            onTap: () {
-              context.pushNamed('general-screen');
-            },
-          ),
+          // SettingsCard(
+          //   leadingIcon: Assets.settings,
+          //   title: generalEn,
+          //   isFirst: true,
+          //   onTap: () {
+          //     context.pushNamed('general-screen');
+          //   },
+          // ),
           SettingsCard(
             leadingIcon: Assets.theme,
             title: "Theme",
+            isFirst: true,
             onTap: () {
               showThemeBottomSheet(context);
               // context.pushNamed('theme-screen');
@@ -50,6 +51,9 @@ class SettingsScreen extends StatelessWidget {
           SettingsCard(
             leadingIcon: Assets.folderUp,
             title: dateImportExportEn,
+            onTap: () {
+              context.pushNamed('import-export-screen');
+            },
           ),
           SettingsCard(
             leadingIcon: Assets.arrowUpDown,

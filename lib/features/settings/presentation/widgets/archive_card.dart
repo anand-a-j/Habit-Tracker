@@ -16,7 +16,7 @@ class ArchiveCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    final habitColor = habit.color;
+
     return Container(
       margin: const EdgeInsets.only(top: 8, bottom: 8),
       padding: const EdgeInsets.all(AppConsts.pSmall),
@@ -41,12 +41,9 @@ class ArchiveCard extends StatelessWidget {
                     ? CrossAxisAlignment.start
                     : CrossAxisAlignment.center,
             children: [
-              CircleAvatar(
-                backgroundColor: habitColor != null
-                    ? Color(habitColor).withValues(alpha: 0.2)
-                    : context.primary.withValues(alpha: 0.2),
-                radius: 20,
-                child: Text(habit.icon),
+              Text(
+                habit.icon,
+                style: const TextStyle(fontSize: 24),
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
@@ -136,7 +133,7 @@ class _ArchieveButtonRow extends ConsumerWidget {
             child: Text(
               restoreEn,
               style: context.bodySmall?.copyWith(
-                color: context.onPrimary,
+                color: context.secondary,
               ),
             ),
           ),

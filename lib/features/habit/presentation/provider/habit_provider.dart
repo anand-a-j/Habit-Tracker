@@ -61,25 +61,15 @@ class HabitNotifier extends StateNotifier<Map<String, Habit>> {
     state = {for (var h in allHabits) h.id: h};
   }
 
-  void reorderHabits(
-    List<Habit> currentList,
-    int oldIndex,
-    int newIndex,
-  ) async {
-    if (newIndex > oldIndex) newIndex -= 1;
+ void reorderHabits(List<Habit> reorderedList) async {
+    // reorderedList is already correctly ordered by UI
 
-    final updatedList = [...currentList];
-    final movedHabit = updatedList.removeAt(oldIndex);
-    updatedList.insert(newIndex, movedHabit);
-
-    // Update each habit's order
-    for (int i = 0; i < updatedList.length; i++) {
-      final updated = updatedList[i].copyWith(order: i);
+    for (int i = 0; i < reorderedList.length; i++) {
+      final updated = reorderedList[i].copyWith(order: i);
       await db.updateHabit(updated);
       state[updated.id] = updated;
     }
 
-    // Force update to state
     state = {...state};
   }
 }

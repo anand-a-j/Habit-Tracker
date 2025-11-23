@@ -13,7 +13,7 @@ class ReorderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    final habitColor = habit.color;
+
     return Container(
       margin: const EdgeInsets.only(top: 8, bottom: 8),
       padding: const EdgeInsets.all(AppConsts.pSmall),
@@ -29,17 +29,11 @@ class ReorderCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         spacing: AppConsts.pSmall,
-        crossAxisAlignment:
-            habit.description != null && habit.description!.isNotEmpty
-                ? CrossAxisAlignment.start
-                : CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircleAvatar(
-            backgroundColor: habitColor != null
-                ? Color(habitColor).withValues(alpha: 0.2)
-                : context.primary.withValues(alpha: 0.2),
-            radius: 20,
-            child: Text(habit.icon),
+          Text(
+            habit.icon,
+            style: const TextStyle(fontSize: 24),
           ),
           Column(
             mainAxisSize: MainAxisSize.min,
