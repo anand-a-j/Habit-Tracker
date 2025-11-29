@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:habitroot/core/extension/habit_extension.dart';
 
 import '../../../../core/components/core_components.dart';
-import '../../../../core/constants/app_constants.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../habit/presentation/provider/habit_provider.dart';
 
@@ -25,7 +24,7 @@ class HabitMarkButton extends ConsumerWidget {
 
     return GestureDetector(
       onTap: () {
-        HapticFeedback.lightImpact();
+        HapticFeedback.mediumImpact();
         final habit = ref.read(habitByIdProvider(habitId));
         final updatedHabit = habit.toggleCompleted();
         ref.read(habitProvider.notifier).updateHabit(updatedHabit);

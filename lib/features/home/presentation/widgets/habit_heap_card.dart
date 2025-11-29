@@ -10,7 +10,10 @@ import 'package:habitroot/core/extension/common.dart';
 import 'package:habitroot/core/extension/habit_extension.dart';
 import 'package:habitroot/features/calendar/domain/calendar_event.dart';
 import 'package:habitroot/features/calendar/presentation/heap_map_calendar.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 
+import '../../../../core/enum/habit_card_type.dart';
+import '../../../../routes/routes.dart';
 import '../../../habit/presentation/provider/habit_provider.dart';
 import '../components/habit_details_bottom_sheet.dart';
 import 'habit_mark_button.dart';
@@ -74,7 +77,7 @@ class HabitHeapCard extends ConsumerWidget {
                     children: [
                       Text(
                         habit.icon,
-                        style: TextStyle(
+                        style:  TextStyle(
                           fontSize: 24,
                         ),
                       ),
@@ -113,12 +116,45 @@ class HabitHeapCard extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppConsts.pMedium),
-                  HeatMapCalendar(
-                      startDate: startDate,
-                      endDate: DateTime.now(),
-                      events: events,
-                      baseColor: Color(habitColor)),
+                  ValueListenableBuilder(
+                    valueListenable: settings.listenable(
+                      keys: [habitCardModeKey],
+                    ),
+                    builder: (context, value, child) {
+                      final HabitCardType habitCardType =
+                          HabitCardType.values[value.get(
+                        habitCardModeKey,
+                        defaultValue: 0,
+                      )];
+
+
+                      Widget content;
+                      if (HabitCardType.week == habitCardType) {
+                        content = const SizedBox.shrink();
+                      } else {
+                        content = Column(
+                          key: const ValueKey("month_view"),
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const SizedBox(height: AppConsts.pMedium),
+                            HeatMapCalendar(
+                              startDate: startDate,
+                              endDate: DateTime.now(),
+                              events: events,
+                              baseColor: Color(habitColor),
+                            ),
+                          ],
+                        );
+                      }
+
+                      return AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 300),
+                        switchInCurve: Curves.easeOut,
+                        switchOutCurve: Curves.easeIn,
+                        child: content,
+                      );
+                    },
+                  )
                 ],
               ),
             ),

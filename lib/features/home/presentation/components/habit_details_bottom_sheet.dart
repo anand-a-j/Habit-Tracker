@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:habitroot/core/components/core_components.dart';
 import 'package:habitroot/core/extension/common.dart';
 import 'package:habitroot/core/extension/habit_extension.dart';
+import 'package:habitroot/core/utils/snackbar_manager.dart';
 import 'package:habitroot/features/analytics/presentation/utils/stats_utils.dart';
 import 'package:habitroot/features/calendar/presentation/habitroot_month_calendar.dart';
 import 'package:habitroot/features/habit/domain/habit.dart';
@@ -59,7 +60,7 @@ class HabitDetailsSheetCard extends ConsumerWidget {
       margin: const EdgeInsets.only(
         left: AppConsts.pSide,
         right: AppConsts.pSide,
-        bottom: 0,
+        bottom: 10,
       ),
       padding: const EdgeInsets.all(AppConsts.pSmall),
       decoration: BoxDecoration(
@@ -157,7 +158,7 @@ class HabitDetailsSheetCard extends ConsumerWidget {
                   HabitSheetQuickButton(
                     icon: Assets.archive,
                     onTap: () {
-                      HapticFeedback.lightImpact();
+                      HapticFeedback.mediumImpact();
 
                       final updatedHabit = currentHabit.copyWith(
                         isArchived: currentHabit.isArchived ? false : true,
@@ -167,6 +168,7 @@ class HabitDetailsSheetCard extends ConsumerWidget {
                             updatedHabit,
                           );
                       Navigator.pop(context);
+                      Snack.success("Habit archived.");
                     },
                   ),
                   HabitSheetQuickButton(
@@ -179,22 +181,7 @@ class HabitDetailsSheetCard extends ConsumerWidget {
                       );
                     },
                   ),
-                  // Expanded(
-                  //   child: HabitSheetQuickButton(
-                  //     type: QuickButtonType.done,
-                  //     onTap: () {
-                  //       final currentHabit = ref.read(habitByIdProvider(habit.id));
-                  //       log("onTap test : ${currentHabit.isCompletedToday}");
-                  //       HapticFeedback.lightImpact();
-
-                  //       final updatedHabit = currentHabit.toggleCompleted();
-                  //       log("update habit : ${updatedHabit.completedDates}");
-
-                  //       ref.read(habitProvider.notifier).updateHabit(updatedHabit);
-                  //     },
-                  //     isCompleted: isCompletedToday,
-                  //   ),
-                  // ),
+                
                 ],
               ),
             ],

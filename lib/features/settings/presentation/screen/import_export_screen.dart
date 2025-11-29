@@ -15,21 +15,27 @@ class ImportExportScreen extends StatelessWidget {
         leadingOnTap: () => context.pop(),
         title: "Data & Backup",
       ),
-      body: Column(
-        children: [
-          SettingsCard(
-            leadingIcon: Assets.import,
-            title: "Import Data",
-            subTitle: "Load habits and backup files into the app",
-            isFirst: true,
-          ),
-          SettingsCard(
-            leadingIcon: Assets.export,
-            title: "Export Data",
-            subTitle: "Save your habits and backup them securely",
-            isLast: true,
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppConsts.pSide,
+        ),
+        child: Column(
+          children: [
+            const SizedBox(height: AppConsts.pLarge),
+            SettingsCard(
+              leadingIcon: Assets.import,
+              title: "Import Data",
+              subTitle: "Load habits and backup files into the app",
+              isFirst: true,
+            ),
+            SettingsCard(
+              leadingIcon: Assets.export,
+              title: "Export Data",
+              subTitle: "Save your habits and backup them securely",
+              isLast: true,
+            ),
+          ],
+        ),
       ),
     );
   }

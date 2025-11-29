@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:habitroot/core/constants/strings.dart';
 import 'package:habitroot/core/extension/common.dart';
+import 'package:habitroot/core/utils/snackbar_manager.dart';
 
 import '../../../../core/constants/app_constants.dart';
 import '../../../habit/domain/habit.dart';
@@ -94,18 +95,32 @@ class _ArchieveButtonRow extends ConsumerWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       mainAxisSize: MainAxisSize.max,
-      spacing: AppConsts.pMedium,
+      spacing: AppConsts.pSmall,
       children: [
         GestureDetector(
           onTap: () {
             HapticFeedback.lightImpact();
 
             ref.read(habitProvider.notifier).deleteHabit(habit.id);
+            Snack.success("Habit permanently removed.");
           },
-          child: Text(
-            deleteEn,
-            style: context.bodySmall?.copyWith(
-              color: context.error,
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 6,
+              horizontal: 8,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(
+                width: 0.8,
+                color: context.error,
+              ),
+            ),
+            child: Text(
+              deleteEn,
+              style: context.bodySmall?.copyWith(
+                color: context.error,
+              ),
             ),
           ),
         ),
@@ -120,6 +135,7 @@ class _ArchieveButtonRow extends ConsumerWidget {
             ref.read(habitProvider.notifier).updateHabit(
                   updatedHabit,
                 );
+            Snack.success("Habit restored.");
           },
           child: Container(
             padding: const EdgeInsets.symmetric(

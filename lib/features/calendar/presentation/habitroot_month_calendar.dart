@@ -230,12 +230,15 @@ class _HabitRootMonthCalendarState extends State<HabitRootMonthCalendar> {
         ),
         margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         decoration: BoxDecoration(
-          color: getHeatmapColor(event.event, widget.baseColor),
-          borderRadius: BorderRadius.circular(50),
+          color: isInCurrentMonth
+              ? getHeatmapColor(event.event, widget.baseColor)
+              : null,
+          borderRadius: BorderRadius.circular(6),
           border: isInCurrentMonth
               ? widget.isHeatMap
                   ? null
-                  : event.event == DateEvent.completed || isSelected
+                  : event.event == DateEvent.completed ||
+                          isSelected && isInCurrentMonth
                       ? Border.all(
                           width: 1,
                           color: widget.baseColor,
@@ -250,6 +253,7 @@ class _HabitRootMonthCalendarState extends State<HabitRootMonthCalendar> {
             dateTime: dateTime,
             isSelected: isSelected,
             isInCurrentMonth: isInCurrentMonth,
+            isFutureDate: dateTime.isAfter(DateTime.now()),
           ),
         ),
       ),
@@ -277,6 +281,7 @@ class _EventDayCard extends StatelessWidget {
   final DateTime dateTime;
   final bool isSelected;
   final bool isInCurrentMonth;
+  final bool isFutureDate;
 
   const _EventDayCard({
     required this.event,
@@ -284,6 +289,7 @@ class _EventDayCard extends StatelessWidget {
     required this.dateTime,
     required this.isSelected,
     required this.isInCurrentMonth,
+    required this.isFutureDate,
   });
 
   @override
@@ -293,7 +299,7 @@ class _EventDayCard extends StatelessWidget {
         return Text(
           '${dateTime.day}',
           style: context.bodyMedium?.copyWith(
-              color: isInCurrentMonth
+              color: isInCurrentMonth && !isFutureDate
                   ? context.onPrimary
                   : context.onPrimary.withValues(alpha: 0.5)),
         );

@@ -6,6 +6,7 @@ import 'package:habitroot/core/extension/common.dart';
 
 import '../../../../core/utils/date_helper.dart';
 import '../widgets/dash_add_habit_button.dart';
+import '../widgets/habit_card_selector.dart';
 import '../widgets/habit_heap_card.dart';
 import '../widgets/habit_listview.dart';
 
@@ -61,7 +62,18 @@ class DashboardScreen extends StatelessWidget {
       body: HabitListView(
         cardBuilder: (id) => HabitHeapCard(),
       ),
-      floatingActionButton: DashAddHabitButton(),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsetsDirectional.only(
+              start: 40,
+            ),
+            child: HabitCardTypeSelector(),
+          ),
+          DashAddHabitButton(),
+        ],
+      ),
     );
   }
 }
