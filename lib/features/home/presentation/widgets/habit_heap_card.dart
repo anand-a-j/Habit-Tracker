@@ -31,9 +31,7 @@ class HabitHeapCard extends ConsumerWidget {
     final habit = ref.watch(habitByIdProvider(habitId));
     final habitColor = habit.color;
 
-    log("habit.color : ${habit.color}");
 
-    log("habit color int after parse : ${habitColor}");
 
     final events = habit.completedDates
         .map((date) => CalendarEvent(
@@ -46,7 +44,6 @@ class HabitHeapCard extends ConsumerWidget {
     final oneYearAgo = now.subtract(const Duration(days: 365));
     final startDate =
         habit.createdAt.isBefore(oneYearAgo) ? habit.createdAt : oneYearAgo;
-    log("habit color : ${habit.color}");
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppConsts.pSide),
       child: GestureDetector(

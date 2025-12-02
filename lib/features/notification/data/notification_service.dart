@@ -19,13 +19,19 @@ class NotificationService {
 
     // 2) set local timezone from the device (IMPORTANT)
     try {
-      final TimezoneInfo? timeZoneInfo =
+      final TimezoneInfo timeZoneInfo =
           await FlutterTimezone.getLocalTimezone();
 
-      if (timeZoneInfo != null && timeZoneInfo.localizedName != null) {
-        log("time zone info : ${timeZoneInfo.localizedName} ${timeZoneInfo.identifier} ");
-        tz.setLocalLocation(
-            tz.getLocation(timeZoneInfo.localizedName?.name ?? ""));
+      String identifier = timeZoneInfo.identifier;
+
+// FIX: Normalize older alias
+      if (identifier == "Asia/Calcutta") {
+        identifier = "Asia/Kolkata";
+      }
+
+      if (timeZoneInfo.localizedName != null) {
+        log("time zone info : ${timeZoneInfo.localizedName} ${identifier} ");
+        tz.setLocalLocation(tz.getLocation(identifier));
       } else {
         tz.setLocalLocation(tz.getLocation('UTC'));
         debugPrint("Error in notificaion init : TimeZoneInfo is NULL");
@@ -107,7 +113,7 @@ class NotificationService {
       scheduled,
       const NotificationDetails(android: androidDetails),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      matchDateTimeComponents: DateTimeComponents.dateAndTime,
+      matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
     );
 
     log('zonedSchedule called for id=999999');
@@ -127,36 +133,6 @@ class NotificationService {
     return scheduled;
   }
 
-  // Example: schedule next occurrence of a weekday at given hour/minute
-  static Future<void> scheduleNextWeekdayTest({
-    required int weekday, // 1=Mon .. 7=Sun
-    required int hour,
-    required int minute,
-  }) async {
-    final scheduled = _nextInstanceOfWeekdayTimeLocal(hour, minute, weekday);
-    log('Scheduling weekly test for weekday=$weekday at $hour:$minute -> $scheduled');
-
-    const androidDetails = AndroidNotificationDetails(
-      'weekday_test_channel',
-      'Weekday Test',
-      channelDescription: 'Channel for weekday scheduling tests',
-      importance: Importance.max,
-      priority: Priority.max,
-    );
-
-    await _notifications.zonedSchedule(
-      999990 + weekday, // unique id per weekday test
-      'Weekday test',
-      'Scheduled for $scheduled',
-      scheduled,
-      const NotificationDetails(android: androidDetails),
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
-    );
-
-    log('zonedSchedule called for weekday test id=${999990 + weekday}');
-  }
-
   Future<void> scheduleWeekdayReminder({
     required int id,
     required String title,
@@ -169,7 +145,7 @@ class NotificationService {
       final scheduleDate = _nextInstanceOfWeekdayTime(hour, minute, weekday);
 
       // log for debugging
-      print('Scheduling id=${_generateWeekdayId(id, weekday)}'
+      log('Scheduling id=${_generateWeekdayId(id, weekday)}'
           ' weekday=$weekday -> $scheduleDate');
 
       const AndroidNotificationDetails androidDetails =
@@ -181,10 +157,6 @@ class NotificationService {
         priority: Priority.max,
         playSound: true,
         enableVibration: true,
-        channelBypassDnd: false, // safe, or user must enable manually
-        autoCancel: true,
-        ongoing: false,
-        onlyAlertOnce: false,
         category: AndroidNotificationCategory.reminder,
         visibility: NotificationVisibility.public,
         channelShowBadge: true,
@@ -204,7 +176,7 @@ class NotificationService {
           iOS: DarwinNotificationDetails(),
         ),
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+        matchDateTimeComponents: null,
       );
     }
   }

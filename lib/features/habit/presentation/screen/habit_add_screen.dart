@@ -138,7 +138,7 @@ class _HabitAddScreenState extends ConsumerState<HabitAddScreen> {
                           initialColor: _habitColor,
                         );
 
-                        log("habit color : ${_habitColor}");
+                  
 
                         setState(() {});
                       },
