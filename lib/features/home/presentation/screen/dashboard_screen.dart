@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:habitroot/core/components/core_components.dart';
 import 'package:habitroot/core/constants/constants.dart';
 import 'package:habitroot/core/extension/common.dart';
+import 'package:habitroot/core/utils/snackbar_manager.dart';
+import 'package:habitroot/features/notification/data/notification_service.dart';
 
 import '../../../../core/utils/date_helper.dart';
 import '../widgets/dash_add_habit_button.dart';
@@ -47,6 +49,25 @@ class DashboardScreen extends StatelessWidget {
           ),
         ),
         actions: [
+          GestureDetector(
+            onTap: () async {
+              await NotificationService.scheduleQuickTest();
+
+              Snack.success("Schdule Quick Test SUCCSS");
+            },
+            child: const Icon(
+              Icons.alarm_rounded,
+              color: Colors.red,
+            ),
+          ),
+          const SizedBox(width: AppConsts.pMedium),
+          GestureDetector(
+            onTap: () async {
+              await NotificationService.showTestNotification();
+            },
+            child: const SvgBuild(assetImage: Assets.arrowUpDown),
+          ),
+          const SizedBox(width: AppConsts.pMedium),
           GestureDetector(
             onTap: () => context.pushNamed('analytics-screen'),
             child: const SvgBuild(assetImage: Assets.analytics),

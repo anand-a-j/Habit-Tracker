@@ -172,8 +172,10 @@ class _HabitRootMonthCalendarState extends State<HabitRootMonthCalendar> {
     DateTime firstDayOfMonth =
         DateTime(widget.startDate.year, widget.startDate.month + monthIndex, 1);
     int daysInMonth = DateTime(
-            widget.startDate.year, widget.startDate.month + monthIndex + 1, 0)
-        .day;
+      widget.startDate.year,
+      widget.startDate.month + monthIndex + 1,
+      0,
+    ).day;
 
     // Step 1: Find the first visible day (Sunday)
     int firstWeekday = firstDayOfMonth.weekday % 7; // 0=Sunday

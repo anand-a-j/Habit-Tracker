@@ -77,7 +77,7 @@ class HabitHeapCard extends ConsumerWidget {
                     children: [
                       Text(
                         habit.icon,
-                        style:  TextStyle(
+                        style: TextStyle(
                           fontSize: 24,
                         ),
                       ),
@@ -126,7 +126,6 @@ class HabitHeapCard extends ConsumerWidget {
                         habitCardModeKey,
                         defaultValue: 0,
                       )];
-
 
                       Widget content;
                       if (HabitCardType.week == habitCardType) {
