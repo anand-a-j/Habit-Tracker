@@ -31,8 +31,6 @@ class HabitHeapCard extends ConsumerWidget {
     final habit = ref.watch(habitByIdProvider(habitId));
     final habitColor = habit.color;
 
-
-
     final events = habit.completedDates
         .map((date) => CalendarEvent(
               date: DateTime(date.year, date.month, date.day),
@@ -44,117 +42,133 @@ class HabitHeapCard extends ConsumerWidget {
     final oneYearAgo = now.subtract(const Duration(days: 365));
     final startDate =
         habit.createdAt.isBefore(oneYearAgo) ? habit.createdAt : oneYearAgo;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppConsts.pSide),
-      child: GestureDetector(
-        onTap: () {
-          showHabitDetailsSheet(context, habit);
-        },
-        child: Column(
-          children: [
-            const SizedBox(height: AppConsts.pSide),
-            Container(
-              padding: const EdgeInsets.all(AppConsts.pSmall),
-              decoration: BoxDecoration(
-                color: context.onSecondary,
-                borderRadius: BorderRadius.circular(AppConsts.rSmall),
-                border: Border.all(
-                  width: 1,
-                  color: context.onSecondaryContainer,
-                ),
+    return GestureDetector(
+      onTap: () {
+        showHabitDetailsSheet(context, habit);
+      },
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 300),
+        switchInCurve: Curves.easeOut,
+        switchOutCurve: Curves.easeIn,
+        child: AnimatedSize(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          child: Container(
+            // duration: const Duration(milliseconds: 300),
+            // curve: Curves.easeInOut,
+            padding: const EdgeInsets.all(AppConsts.pSmall),
+            margin: EdgeInsetsDirectional.only(
+              start: AppConsts.pSide,
+              end: AppConsts.pSide,
+              top: AppConsts.pSide,
+            ),
+            decoration: BoxDecoration(
+              color: context.onSecondary,
+              borderRadius: BorderRadius.circular(AppConsts.rSmall),
+              border: Border.all(
+                width: 1,
+                color: context.onSecondaryContainer,
               ),
-              child: Column(
-                children: [
-                  Row(
-                    spacing: AppConsts.pSmall,
-                    crossAxisAlignment: habit.description != null &&
-                            habit.description!.isNotEmpty
-                        ? CrossAxisAlignment.start
-                        : CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        habit.icon,
-                        style: TextStyle(
-                          fontSize: 24,
-                        ),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  spacing: AppConsts.pSmall,
+                  crossAxisAlignment:
+                      habit.description != null && habit.description!.isNotEmpty
+                          ? CrossAxisAlignment.start
+                          : CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      habit.icon,
+                      style: TextStyle(
+                        fontSize: 24,
                       ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: _size.width - 174,
+                          child: Text(
+                            habit.name,
+                            style: context.bodyMedium,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        if (habit.description != null &&
+                            habit.description!.isNotEmpty)
                           SizedBox(
                             width: _size.width - 174,
                             child: Text(
-                              habit.name,
-                              style: context.bodyMedium,
-                              maxLines: 1,
+                              habit.description ?? "",
+                              style: context.labelLarge?.copyWith(
+                                color: context.surface,
+                              ),
+                              maxLines: 3,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          if (habit.description != null &&
-                              habit.description!.isNotEmpty)
-                            SizedBox(
-                              width: _size.width - 174,
-                              child: Text(
-                                habit.description ?? "",
-                                style: context.labelLarge?.copyWith(
-                                  color: context.surface,
-                                ),
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                        ],
-                      ),
-                      const Spacer(),
-                      HabitMarkButton(
-                        backgroundColor: Color(habitColor),
-                        habitId: habit.id,
-                      ),
-                    ],
-                  ),
-                  ValueListenableBuilder(
-                    valueListenable: settings.listenable(
-                      keys: [habitCardModeKey],
+                      ],
                     ),
-                    builder: (context, value, child) {
-                      final HabitCardType habitCardType =
-                          HabitCardType.values[value.get(
-                        habitCardModeKey,
-                        defaultValue: 0,
-                      )];
+                    const Spacer(),
+                    HabitMarkButton(
+                      backgroundColor: Color(habitColor),
+                      habitId: habit.id,
+                    ),
+                  ],
+                ),
+                ValueListenableBuilder(
+                  valueListenable: settings.listenable(
+                    keys: [habitCardModeKey],
+                  ),
+                  builder: (context, value, child) {
+                    final HabitCardType habitCardType =
+                        HabitCardType.values[value.get(
+                      habitCardModeKey,
+                      defaultValue: 0,
+                    )];
 
-                      Widget content;
-                      if (HabitCardType.week == habitCardType) {
-                        content = const SizedBox.shrink();
-                      } else {
-                        content = Column(
-                          key: const ValueKey("month_view"),
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const SizedBox(height: AppConsts.pMedium),
-                            HeatMapCalendar(
-                              startDate: startDate,
-                              endDate: DateTime.now(),
-                              events: events,
-                              baseColor: Color(habitColor),
-                            ),
-                          ],
-                        );
-                      }
-
-                      return AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 300),
-                        switchInCurve: Curves.easeOut,
-                        switchOutCurve: Curves.easeIn,
-                        child: content,
+                    Widget content;
+                    if (HabitCardType.week == habitCardType) {
+                      content = const SizedBox.shrink();
+                    } else {
+                      content = Column(
+                        key: const ValueKey("month_view"),
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const SizedBox(height: AppConsts.pMedium),
+                          HeatMapCalendar(
+                            startDate: startDate,
+                            endDate: DateTime.now(),
+                            events: events,
+                            baseColor: Color(habitColor),
+                          ),
+                        ],
                       );
-                    },
-                  )
-                ],
-              ),
+                    }
+
+                    return AnimatedSize(
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeInOut,
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 200),
+                        switchInCurve: Curves.easeIn,
+                        switchOutCurve: Curves.easeOut,
+                        transitionBuilder: (child, animation) {
+                          return FadeTransition(
+                              opacity: animation, child: child);
+                        },
+                        child: content,
+                      ),
+                    );
+                  },
+                )
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

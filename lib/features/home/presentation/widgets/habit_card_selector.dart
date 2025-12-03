@@ -26,13 +26,13 @@ class _HabitCardTypeSelectorState extends State<HabitCardTypeSelector> {
           style: ButtonStyle(
             backgroundColor: WidgetStateProperty.resolveWith<Color>(
               (states) => states.contains(WidgetState.selected)
-                  ? context.primary
+                  ? context.onPrimary
                   : context.onSecondary,
             ),
             iconColor: WidgetStateProperty.resolveWith<Color>(
               (states) => states.contains(WidgetState.selected)
                   ? context.onPrimary
-                  : context.primary,
+                  : context.onPrimary,
             ),
           ),
           segments: <ButtonSegment<HabitCardType>>[
@@ -42,7 +42,7 @@ class _HabitCardTypeSelectorState extends State<HabitCardTypeSelector> {
                 Icons.calendar_view_week,
                 color: selectedType == HabitCardType.week
                     ? context.secondary
-                    : context.primary,
+                    : context.onPrimary,
               ),
             ),
             ButtonSegment<HabitCardType>(
@@ -51,7 +51,7 @@ class _HabitCardTypeSelectorState extends State<HabitCardTypeSelector> {
                 Icons.calendar_today,
                 color: selectedType == HabitCardType.month
                     ? context.secondary
-                    : context.primary,
+                    : context.onPrimary,
               ),
             ),
           ],

@@ -181,7 +181,6 @@ class HabitDetailsSheetCard extends ConsumerWidget {
                       );
                     },
                   ),
-                
                 ],
               ),
             ],

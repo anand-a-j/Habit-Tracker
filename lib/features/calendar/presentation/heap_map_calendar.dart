@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:habitroot/core/extension/time_extension.dart';
 import 'package:habitroot/core/theme/app_color_scheme.dart';
 import 'package:habitroot/features/calendar/domain/calendar_event.dart';
 
@@ -121,48 +124,37 @@ class _HeatMapCalendarState extends State<HeatMapCalendar> {
 
     final eventType = _eventMap[key] ?? DateEvent.normal;
 
-    final habitStart = _dateOnly(widget.habitStartDate ?? widget.startDate);
-    final today = _dateOnly(DateTime.now());
+    final DateTime? habitStart = widget.events
+        .map((e) => e.date)
+        .where((d) => d != null)
+        .cast<DateTime>()
+        .fold<DateTime?>(null, (prev, date) {
+      if (prev == null) return date;
+      return date.isBefore(prev) ? date : prev;
+    });
 
-    // Determine opacity with priority:
-    // 1) selected -> 1.0
-    // 2) completed event -> 1.0
-    // 3) inside habit start..today and inside calendar -> 0.4
-    // 4) inside calendar range (but not habit range) -> 0.2
-    // 5) outside calendar range (future or before start) -> 0.08 (still visible)
     double opacity;
     if (_selectedDate != null && _isSameDay(_selectedDate!, date)) {
       opacity = 1.0;
     } else if (eventType == DateEvent.completed) {
       opacity = 1.0;
-    } else if (!date.isBefore(habitStart) &&
-        !date.isAfter(today) &&
-        insideRange) {
-      opacity = 0.4;
-    } else if (insideRange) {
-      opacity = 0.2;
+    } else if (habitStart != null &&
+        date.isAfter(habitStart) &&
+        date.isBefore(DateTime.now())) {
+      opacity = 0.35;
     } else {
       opacity = 0.2;
     }
 
     final color = widget.baseColor.withOpacity(opacity);
 
-    return GestureDetector(
-      onTap: insideRange
-          ? () {
-              setState(() {
-                _selectedDate = key;
-              });
-            }
-          : null,
-      child: Container(
-        margin: const EdgeInsets.all(1.5),
-        width: cellSize,
-        height: cellSize,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: _cellRadius,
-        ),
+    return Container(
+      margin: const EdgeInsets.all(1.5),
+      width: cellSize,
+      height: cellSize,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: _cellRadius,
       ),
     );
   }

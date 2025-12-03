@@ -21,11 +21,11 @@ class DashAddHabitButton extends StatelessWidget {
       ),
       child: Container(
         height: 48,
-        width: 48,
+        width: 68,
         decoration: BoxDecoration(
-          color: context.primary,
+          color: context.onPrimary,
           borderRadius: BorderRadius.circular(
-            AppConsts.rSmall,
+            50,
           ),
         ),
         child: Center(
