@@ -24,32 +24,49 @@ mixin AppColorScheme {
 
   /// Preset colors for habit selection (used in habit creation UI)
   static const List<Color> habitColorOptions = [
-    // Greens & Teals
-    Color(0xFF6FBF73), // Fresh Mint Green
-    Color(0xFF81C784), // Soft Green
-    Color(0xFF388E3C), // Forest Green
-    Color(0xFF2E7D32), // Deep Nature Green
+    // --- WARM HUES: REDS, PINKS, & MAGENTAS (5) ---
+    // Energy, Action, Passion. Ordered from Red to Pink/Violet.
+    Color(0xFFFF5252), // 1. Vibrant Red
+    Color(0xFFFF6D00), // 2. Deep Sunset Orange (Transition to Orange)
+    Color(0xFFF50057), // 3. Deep Hot Pink
+    Color(0xFFE040FB), // 4. Bright Magenta
+    Color(0xFF7C4DFF), // 5. Electric Violet (Transition to Purple)
 
-    // Blues & Purples
-    Color(0xFF64B5F6), // Sky Blue
-    Color(0xFF1976D2), // Calm Blue
-    Color(0xFF1565C0), // Deep Ocean Blue
-    Color(0xFF90CAF9), // Light Steel Blue
+    // --- PURPLES & LAVENDERS (3) ---
+    // Focus, Creativity, Calm.
+    Color(0xFF651FFF), // 6. Deep Purple Punch
+    Color(0xFF9C27B0), // 7. Strong Purple
+    Color(0xFFD1C4E9), // 8. Light Lavender (Soft touch)
 
-    // Pinks & Reds
-    Color(0xFF9575CD), // Soft Purple
-    Color(0xFF7E57C2), // Muted Purple
-    Color(0xFF673AB7), // Deep Purple
-    Color(0xFFB39DDB), // Pastel Violet
+    // --- COOL HUES: BLUES & CYANS (5) ---
+    // Calm, Logic, Focus. Ordered from Deep to Bright.
+    Color(0xFF2962FF), // 9. Deep Electric Blue
+    Color(0xFF448AFF), // 10. Electric Blue
+    Color(0xFF03A9F4), // 11. Vibrant Sky Blue
+    Color(0xFF00BCD4), // 12. Aqua
+    Color(0xFF18FFFF), // 13. Super Bright Cyan
 
-    // Yellows & Oranges
-    Color(0xFFFFB74D), // Muted Orange
-    Color(0xFFFFA726), // Warm Orange
-    Color(0xFFFFD54F), // Soft Yellow
-    Color(0xFFFBC02D), // Golden Yellow
-    // Neutrals
-    Color(0xFF9E9E9E), // Medium Grey
+    // --- EARTH & GROWTH: GREENS & TEALS (6) ---
+    // Health, Growth, Balance. Ordered from Dark Teal to Neon.
+    Color(0xFF26A69A), // 14. Strong Teal
+    Color(0xFF00B8D4), // 15. Bright Teal
+    Color(0xFF4CAF50), // 16. Standard Bright Green
+    Color(0xFF8BC34A), // 17. Lime Green
+    Color(0xFF69F0AE), // 18. Mint Green
+    Color(0xFF00FF7F), // 19. Spring Green (Neon)
 
-    Color(0xFF616161), // Deep Grey
+    // --- WARM ACCENTS: YELLOWS & ORANGES (4) ---
+    // Alertness, Energy, Creativity. Ordered from Dark to Light.
+    Color(0xFFFF9800), // 20. True Orange
+    Color(0xFFFFC107), // 21. Vibrant Gold
+    Color(0xFFFFEA00), // 22. Electric Yellow
+
+    // --- NEUTRAL ACCENT (1) ---
+    // For tasks that don't need a mood assigned.
+    Color(0xFFCD9A9D), // 23. Dusty Rose (A soft, near-neutral accent)
+
+    // --- SOFT BLUE ACCENT (1) ---
+    // Soft, calming default.
+    Color(0xFF9FA8DA), // 24. Lavender Blue (Softer touch)
   ];
 }

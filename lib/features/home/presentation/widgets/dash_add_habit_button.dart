@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habitroot/core/constants/app_constants.dart';
 import 'package:habitroot/core/extension/common.dart';
@@ -12,27 +13,32 @@ class DashAddHabitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        context.pushNamed("habit-add-screen");
-      },
-      borderRadius: BorderRadius.circular(
-        AppConsts.rCircle,
-      ),
-      child: Container(
-        height: 48,
-        width: 68,
-        decoration: BoxDecoration(
-          color: context.onPrimary,
-          borderRadius: BorderRadius.circular(
-            50,
-          ),
+    return Material(
+      color: context.onPrimary,
+      borderRadius: BorderRadius.circular(50),
+      child: InkWell(
+        onTap: () {
+          HapticFeedback.mediumImpact();
+          context.pushNamed("habit-add-screen");
+        },
+        borderRadius: BorderRadius.circular(
+          AppConsts.rCircle,
         ),
-        child: Center(
-          child: Icon(
-            Icons.add,
-            size: 24,
-            color: context.secondary,
+        child: Container(
+          height: 48,
+          width: 68,
+          decoration: BoxDecoration(
+            color: context.onPrimary,
+            borderRadius: BorderRadius.circular(
+              50,
+            ),
+          ),
+          child: Center(
+            child: Icon(
+              Icons.add,
+              size: 24,
+              color: context.secondary,
+            ),
           ),
         ),
       ),

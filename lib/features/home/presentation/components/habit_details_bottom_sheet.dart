@@ -148,9 +148,12 @@ class HabitDetailsSheetCard extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _HabitDetailsStrengthCard(
-                habit: habit,
+              Expanded(
+                child: _HabitDetailsStrengthCard(
+                  habit: habit,
+                ),
               ),
+              const SizedBox(width: AppConsts.pSmall),
               Row(
                 mainAxisSize: MainAxisSize.max,
                 spacing: AppConsts.pSmall,
@@ -158,7 +161,7 @@ class HabitDetailsSheetCard extends ConsumerWidget {
                   HabitSheetQuickButton(
                     icon: Assets.archive,
                     onTap: () {
-                      HapticFeedback.mediumImpact();
+                      HapticFeedback.heavyImpact();
 
                       final updatedHabit = currentHabit.copyWith(
                         isArchived: currentHabit.isArchived ? false : true,

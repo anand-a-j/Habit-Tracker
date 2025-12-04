@@ -49,25 +49,7 @@ class DashboardScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          GestureDetector(
-            onTap: () async {
-              await NotificationService.scheduleQuickTest();
-
-              Snack.success("Schdule Quick Test SUCCSS");
-            },
-            child: const Icon(
-              Icons.alarm_rounded,
-              color: Colors.red,
-            ),
-          ),
-          const SizedBox(width: AppConsts.pMedium),
-          GestureDetector(
-            onTap: () async {
-              await NotificationService.showTestNotification();
-            },
-            child: const SvgBuild(assetImage: Assets.arrowUpDown),
-          ),
-          const SizedBox(width: AppConsts.pMedium),
+          
           GestureDetector(
             onTap: () => context.pushNamed('analytics-screen'),
             child: const SvgBuild(assetImage: Assets.analytics),

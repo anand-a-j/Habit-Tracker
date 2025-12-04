@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 1700), () {
+    Future.delayed(const Duration(seconds: 1), () {
       if (mounted) {
         context.goNamed('dashboard-screen');
       }

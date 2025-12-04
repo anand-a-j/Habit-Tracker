@@ -46,7 +46,7 @@ class _HeatMapCalendarState extends State<HeatMapCalendar> {
   final ScrollController _scrollController = ScrollController();
   DateTime? _selectedDate;
 
-  static final BorderRadius _cellRadius = BorderRadius.circular(1);
+  static final BorderRadius _cellRadius = BorderRadius.circular(1.5);
 
   @override
   void initState() {
@@ -141,9 +141,9 @@ class _HeatMapCalendarState extends State<HeatMapCalendar> {
     } else if (habitStart != null &&
         date.isAfter(habitStart) &&
         date.isBefore(DateTime.now())) {
-      opacity = 0.35;
+      opacity = 0.3;
     } else {
-      opacity = 0.2;
+      opacity = 0.12;
     }
 
     final color = widget.baseColor.withOpacity(opacity);

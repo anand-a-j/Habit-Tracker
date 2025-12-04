@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:habitroot/core/components/core_components.dart';
 import 'package:habitroot/core/constants/assets.dart';
 import 'package:habitroot/core/extension/common.dart';
@@ -219,6 +220,7 @@ class _HabitRootMonthCalendarState extends State<HabitRootMonthCalendar> {
 
     return GestureDetector(
       onTap: () {
+        HapticFeedback.heavyImpact();
         bool isFutureDate = dateTime.isAfter(DateTime.now());
         if (!isFutureDate && isInCurrentMonth) {
           widget.changeDay(dateTime, event.event);
