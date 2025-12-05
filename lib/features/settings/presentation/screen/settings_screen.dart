@@ -7,6 +7,7 @@ import 'package:habitroot/core/constants/strings.dart';
 import 'package:habitroot/features/settings/presentation/widgets/settings_card.dart';
 
 import '../../../../core/components/core_components.dart';
+import '../../../home/presentation/components/app_premium_tile.dart';
 import '../widgets/theme_sheet.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -24,6 +25,8 @@ class SettingsScreen extends StatelessWidget {
         children: [
           const SizedBox(height: AppConsts.pLarge),
 
+          AppPremiumTile(),
+          const SizedBox(height: AppConsts.pLarge),
           // SettingsCard(
           //   leadingIcon: Assets.settings,
           //   title: generalEn,
@@ -81,10 +84,14 @@ class SettingsScreen extends StatelessWidget {
             leadingIcon: Assets.externalLink,
             title: shareTheAppEn,
           ),
-          SettingsCard(
-            isLast: true,
-            leadingIcon: Assets.messageSquareDiff,
-            title: feedbackEn,
+          GestureDetector(
+            onTap: () {},
+            child: SettingsCard(
+              isLast: true,
+              leadingIcon: Assets.messageSquareDiff,
+              title: feedbackEn,
+              subTitle: "Tell us what you think or found anything wrong?",
+            ),
           ),
         ],
       ),

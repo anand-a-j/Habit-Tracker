@@ -22,6 +22,9 @@ mixin AppColorScheme {
 
   static const Color primaryTouchEffect = Color(0XFF56d276);
 
+  static const Color premiumPrimary = Color(0XFFFECD04);
+  static const Color premiumOnPrimary = Color(0XFF8A4001);
+
   /// Preset colors for habit selection (used in habit creation UI)
   static const List<Color> habitColorOptions = [
     // --- WARM HUES: REDS, PINKS, & MAGENTAS (5) ---

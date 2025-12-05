@@ -26,4 +26,5 @@ class Assets {
   static const String theme = "$_baseUrl/theme.svg";
   static const String import = "$_baseUrl/file-down.svg";
   static const String export = "$_baseUrl/file-up.svg";
+  static const String pro = "$_baseUrl/pro.svg";
 }

@@ -19,6 +19,9 @@ class AppConsts {
   static const double pExtraLarge = 30;
   static const double pUltra = 35;
   static const double pUltraLarge = 40;
+
+  // Contact support
+    static const String appSupportEmail = "anandbuilds.app@gmail.com";
 }
 
 // keys
@@ -26,3 +29,5 @@ const String themeModeKey = 'key_theme_mode';
 const String weekStartKey = 'key_week_start';
 
 const String habitCardModeKey = 'key_habit_card_mode';
+
+
