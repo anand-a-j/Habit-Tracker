@@ -5,7 +5,7 @@ import 'package:habitroot/core/constants/constants.dart';
 import 'package:habitroot/core/extension/common.dart';
 
 import '../../../../core/utils/date_helper.dart';
-import '../components/app_premium_button.dart';
+import '../../../premium/presentation/widgets/app_premium_button.dart';
 import '../widgets/dash_add_habit_button.dart';
 import '../widgets/habit_card_selector.dart';
 import '../widgets/habit_heap_card.dart';

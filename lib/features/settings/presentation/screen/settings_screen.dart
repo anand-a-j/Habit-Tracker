@@ -3,11 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:habitroot/core/constants/app_constants.dart';
 import 'package:habitroot/core/constants/assets.dart';
 import 'package:habitroot/core/constants/strings.dart';
+import 'package:habitroot/core/utils/url_launcher_utils.dart';
 
 import 'package:habitroot/features/settings/presentation/widgets/settings_card.dart';
 
 import '../../../../core/components/core_components.dart';
-import '../../../home/presentation/components/app_premium_tile.dart';
+import '../../../../core/utils/snackbar_manager.dart';
+import '../../../premium/presentation/widgets/app_premium_tile.dart';
 import '../widgets/theme_sheet.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -85,7 +87,13 @@ class SettingsScreen extends StatelessWidget {
             title: shareTheAppEn,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () async {
+              try {
+                await UrlLauncherUtils.openSupportEmail();
+              } catch (e) {
+                Snack.error(e.toString());
+              }
+            },
             child: SettingsCard(
               isLast: true,
               leadingIcon: Assets.messageSquareDiff,
