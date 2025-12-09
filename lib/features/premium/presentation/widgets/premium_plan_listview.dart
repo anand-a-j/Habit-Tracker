@@ -87,7 +87,8 @@ class _PremiumPlanTile extends StatelessWidget {
     // Determine the border color based on selection status
     final Color borderColor = isSelected
         ? AppColorScheme.premiumPrimary // Highlight color when selected
-        : Colors.grey.shade300; // Muted color when unselected
+        : Colors.grey.shade300
+            .withValues(alpha: 0.5); // Muted color when unselected
 
     // Determine the color of the checkmark icon
     final Color checkIconColor =
@@ -98,14 +99,14 @@ class _PremiumPlanTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 10,
-          vertical: 15, // Increased vertical padding for better spacing
+          vertical: 10, // Increased vertical padding for better spacing
         ),
         margin: const EdgeInsets.symmetric(
-          horizontal: 10,
+          horizontal: 0,
           vertical: 8,
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(16),
           border: Border.all(
             width:
                 isSelected ? 2.0 : 1.5, // Slightly thicker border when selected
@@ -131,49 +132,62 @@ class _PremiumPlanTile extends StatelessWidget {
               crossAxisAlignment:
                   CrossAxisAlignment.start, // Align text to the left
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      title,
-                      style: context.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
+                SizedBox(
+                  height: 22,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        title,
+                        style: context.bodyLarge?.copyWith(
+                          color: isSelected
+                              ? AppColorScheme.premiumPrimary
+                              : Colors.grey.shade600,
+                          fontSize: 14,
+                        ),
+                        // style: context.bodyLarge?.copyWith(
+                        //   fontWeight: FontWeight.bold,
+                        // ),
                       ),
-                    ),
-                    const SizedBox(width: 8), // Spacing between title and offer
-                    // Offer Banner
-                    if (offerTitle.isNotEmpty)
-                      Container(
-                        height: 22,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 0,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          // Use green for 'Best Value' and red for others/default
-                          color: isGreen ? Colors.green.shade600 : Colors.red,
-                        ),
-                        child: Center(
-                          child: Text(
-                            offerTitle,
-                            style: context.labelLarge?.copyWith(
-                              color: context.onPrimary,
-                              fontWeight: FontWeight.bold,
+                      const SizedBox(
+                          width: 8), // Spacing between title and offer
+                      // Offer Banner
+                      if (offerTitle.isNotEmpty)
+                        Container(
+                          height: 22,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 0,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            // Use green for 'Best Value' and red for others/default
+                            color: isGreen ? Colors.green.shade600 : Colors.red,
+                          ),
+                          child: Center(
+                            child: Text(
+                              offerTitle,
+                              style: context.labelLarge?.copyWith(
+                                  color: context.onPrimary,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1),
                             ),
                           ),
-                        ),
-                      )
-                  ],
+                        )
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 4), // Spacing between rows
+                // const SizedBox(height: 4), // Spacing between rows
                 // Subtitle/Price Details
                 Text(
                   subTitle,
                   style: context.bodyLarge?.copyWith(
-                    color: Colors.grey.shade600,
-                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                   ),
+                  // style: context.bodyLarge?.copyWith(
+                  //   color: Colors.grey.shade600,
+                  //   fontSize: 14,
+                  // ),
                 ),
               ],
             ),
@@ -184,7 +198,9 @@ class _PremiumPlanTile extends StatelessWidget {
                   ? Icons.check_circle_rounded // Filled icon when selected
                   : Icons.radio_button_off, // Outline/unselected icon
               size: 24,
-              color: checkIconColor,
+              color: !isSelected
+                  ? checkIconColor.withValues(alpha: 0.5)
+                  : checkIconColor,
             ),
           ],
         ),

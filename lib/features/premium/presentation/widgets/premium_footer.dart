@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habitroot/core/constants/app_constants.dart';
 import 'package:habitroot/core/extension/common.dart';
 import 'package:habitroot/features/premium/presentation/widgets/premium_pay_button.dart';
 
@@ -7,34 +8,42 @@ class PremiumFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        PremiumPayButton(
-          label: "Continue",
-          onPressed: () {},
-          isDisabled: false,
-          isLoading: false,
-        ),
-        const SizedBox(height: 16),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _FooterLinkText(
-              title: "Restore",
-              onTap: () {},
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          PremiumPayButton(
+            label: "Continue",
+            onPressed: () {},
+            isDisabled: false,
+            isLoading: false,
+          ),
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppConsts.pSide,
             ),
-            _FooterLinkText(
-              title: "Policy",
-              onTap: () {},
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _FooterLinkText(
+                  title: "Restore",
+                  onTap: () {},
+                ),
+                _FooterLinkText(
+                  title: "Policy",
+                  onTap: () {},
+                ),
+                _FooterLinkText(
+                  title: "Terms",
+                  onTap: () {},
+                ),
+              ],
             ),
-            _FooterLinkText(
-              title: "Terms",
-              onTap: () {},
-            ),
-          ],
-        )
-      ],
+          ),
+          const SizedBox(height: 10),
+        ],
+      ),
     );
   }
 }

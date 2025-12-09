@@ -13,7 +13,7 @@ void showThemeBottomSheet(BuildContext context) {
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
-    backgroundColor: context.onSecondary,
+    backgroundColor: context.secondary,
     isScrollControlled: true,
     builder: (context) => const ThemeBottomSheet(),
   );
@@ -112,7 +112,7 @@ class _ThemeButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(
               AppConsts.rSmall,
             ),
-            color: context.secondary,
+            color: context.secondaryFixed,
             border: Border.all(
               width: 1,
               color: isSelected ? context.onPrimary : Colors.transparent,

@@ -8,6 +8,7 @@ import 'package:habitroot/core/utils/snackbar_manager.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../habit/domain/habit.dart';
 import '../../../habit/presentation/provider/habit_provider.dart';
+import '../../../notification/data/notification_service.dart';
 
 class ArchiveCard extends StatelessWidget {
   const ArchiveCard({super.key, required this.habit});
@@ -128,13 +129,27 @@ class _ArchieveButtonRow extends ConsumerWidget {
           onTap: () {
             HapticFeedback.lightImpact();
 
-            final updatedHabit = habit.copyWith(
-              isArchived: habit.isArchived ? false : true,
-            );
+            final updatedHabit = habit.copyWith(isArchived: false);
 
-            ref.read(habitProvider.notifier).updateHabit(
-                  updatedHabit,
-                );
+            ref.read(habitProvider.notifier).updateHabit(updatedHabit);
+
+            // Restore reminders if habit has reminder enabled
+            final reminder = updatedHabit.reminder;
+            if (reminder != null && reminder.isEnabled) {
+              final parts = reminder.time.split(":");
+              final hour = int.parse(parts[0]);
+              final minute = int.parse(parts[1]);
+
+              NotificationService().updateHabitReminder(
+                habit: updatedHabit,
+                title: "Habit Reminder",
+                body: updatedHabit.name,
+                hour: hour,
+                minute: minute,
+                weekdays: reminder.weekdays,
+              );
+            }
+
             Snack.success("Habit restored.");
           },
           child: Container(

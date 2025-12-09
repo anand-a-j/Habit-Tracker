@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppConsts {
-  static const String appName = "HabitRoot";
+  static const String appName = "HabitBud";
 
   // Border Radius
   static const double rMicro = 6.0;

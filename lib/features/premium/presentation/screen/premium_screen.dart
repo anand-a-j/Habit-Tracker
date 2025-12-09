@@ -45,7 +45,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                 ),
               ),
               Text(
-                "HabitDock Pro",
+                "HabitBud Pro",
                 style: context.titleMedium?.copyWith(
                   color: AppColorScheme.premiumPrimary,
                   fontWeight: FontWeight.w900,
@@ -60,10 +60,21 @@ class _PremiumScreenState extends State<PremiumScreen> {
                 ),
               ),
               const SizedBox(height: 22),
+              Center(
+                child: Text(
+                  "Premium Features",
+                  style: context.bodyLarge?.copyWith(
+                    color: context.onPrimary,
+                    fontWeight: FontWeight.w600,
+                    height: 1,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
-                  vertical: 26,
+                  vertical: 12,
                 ),
                 decoration: BoxDecoration(
                   color: context.onSecondary,
@@ -77,14 +88,6 @@ class _PremiumScreenState extends State<PremiumScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 12,
                   children: [
-                    Text(
-                      "Premium Features",
-                      style: context.bodyLarge?.copyWith(
-                        color: context.onPrimary,
-                        fontWeight: FontWeight.w600,
-                        height: 1,
-                      ),
-                    ),
                     // const SizedBox(height: 6),
                     PremiumFeatureTile(
                       color: Colors.amber,
@@ -144,6 +147,16 @@ class _PremiumScreenState extends State<PremiumScreen> {
                   ],
                 ),
               ),
+              const SizedBox(height: 24),
+              Text(
+                "Choose Your Plan",
+                style: context.bodyLarge?.copyWith(
+                  color: context.onPrimary,
+                  fontWeight: FontWeight.w600,
+                  height: 1,
+                ),
+              ),
+              const SizedBox(height: 10),
               PremiumPlanListview(),
             ],
           ),

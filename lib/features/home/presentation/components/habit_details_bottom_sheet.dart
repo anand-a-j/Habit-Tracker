@@ -9,6 +9,7 @@ import 'package:habitroot/core/utils/snackbar_manager.dart';
 import 'package:habitroot/features/analytics/presentation/utils/stats_utils.dart';
 import 'package:habitroot/features/calendar/presentation/habitroot_month_calendar.dart';
 import 'package:habitroot/features/habit/domain/habit.dart';
+import 'package:habitroot/features/notification/data/notification_service.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/enum/date_event.dart';
@@ -170,6 +171,8 @@ class HabitDetailsSheetCard extends ConsumerWidget {
                       ref.read(habitProvider.notifier).updateHabit(
                             updatedHabit,
                           );
+
+                      NotificationService().cancelHabitReminders(updatedHabit);
                       Navigator.pop(context);
                       Snack.success("Habit archived.");
                     },
