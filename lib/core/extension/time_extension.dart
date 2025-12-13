@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart' show TimeOfDay;
 import 'package:intl/intl.dart' as intl;
-import 'package:intl/intl.dart';
 
 extension DateUtils on DateTime {
   bool get isToday {

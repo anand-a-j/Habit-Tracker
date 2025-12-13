@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:habitroot/features/home/presentation/widgets/habit_empty_view.dart';
-import 'package:habitroot/features/home/presentation/widgets/habit_heap_card.dart';
+import 'package:habitroot/features/home/presentation/widgets/habit_heap_card/habit_heap_card.dart';
 
 import '../../../habit/presentation/provider/habit_provider.dart';
 
 class HabitListView extends ConsumerWidget {
-  final Widget Function(String habitId) cardBuilder;
-
   const HabitListView({
     super.key,
-    required this.cardBuilder,
   });
 
   @override
@@ -27,24 +24,22 @@ class HabitListView extends ConsumerWidget {
     );
 
     if (habitIds.isEmpty) {
-      return HabitEmptyView();
-      // return const Text(
-      //   "NO Habits",
-      //   style: TextStyle(color: Colors.white),
-      // );
+      return const HabitEmptyView();
     }
 
     return ListView.builder(
-      itemCount: habitIds.length,
+      itemCount: habitIds.length + 1,
       itemBuilder: (context, index) {
+        if (index == habitIds.length) {
+          return const SizedBox(height: 50);
+        }
         final habitId = habitIds[index];
+
         return ProviderScope(
           overrides: [
             heapCardHabitId.overrideWithValue(habitId),
           ],
-          child: Builder(builder: (context) {
-            return cardBuilder(habitId);
-          }),
+          child: const HabitHeapCard(),
         );
       },
     );

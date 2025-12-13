@@ -8,7 +8,6 @@ import '../../../../core/utils/date_helper.dart';
 import '../../../premium/presentation/widgets/app_premium_button.dart';
 import '../widgets/dash_add_habit_button.dart';
 import '../widgets/habit_card_selector.dart';
-import '../widgets/habit_heap_card.dart';
 import '../widgets/habit_listview.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -62,9 +61,7 @@ class DashboardScreen extends StatelessWidget {
           const SizedBox(width: AppConsts.pSide),
         ],
       ),
-      body: HabitListView(
-        cardBuilder: (id) => HabitHeapCard(),
-      ),
+      body: HabitListView(),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

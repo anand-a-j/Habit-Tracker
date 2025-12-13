@@ -42,7 +42,9 @@ class UrlLauncherUtils {
     final uri = Uri(
       scheme: 'mailto',
       path: email,
-      query: Uri.encodeQueryComponent('subject=App Feedback & Bug Report'),
+      queryParameters: {
+        'subject': 'App Feedback & Bug Report',
+      },
     );
 
     if (!await canLaunchUrl(uri)) {

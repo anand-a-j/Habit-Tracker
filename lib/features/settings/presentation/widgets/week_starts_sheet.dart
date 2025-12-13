@@ -1,140 +1,140 @@
-import 'package:flutter/material.dart';
-import 'package:habitroot/core/extension/common.dart';
-import 'package:habitroot/routes/routes.dart';
+// import 'package:flutter/material.dart';
+// import 'package:habitroot/core/extension/common.dart';
+// import 'package:habitroot/routes/routes.dart';
 
-import '../../../../core/components/svg_build.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../../../../core/constants/assets.dart';
-import '../../../../core/enum/weekday.dart';
+// import '../../../../core/components/svg_build.dart';
+// import '../../../../core/constants/app_constants.dart';
+// import '../../../../core/constants/assets.dart';
+// import '../../../../core/enum/weekday.dart';
 
-void showWeekStartBottomSheet(BuildContext context) {
-  showModalBottomSheet<ThemeMode>(
-    context: context,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
-    backgroundColor: context.secondaryFixed,
-    isScrollControlled: true,
-    builder: (context) => const WeekStartSheet(),
-  );
-}
+// void showWeekStartBottomSheet(BuildContext context) {
+//   showModalBottomSheet<ThemeMode>(
+//     context: context,
+//     shape: const RoundedRectangleBorder(
+//       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+//     ),
+//     backgroundColor: context.secondaryFixed,
+//     isScrollControlled: true,
+//     builder: (context) => const WeekStartSheet(),
+//   );
+// }
 
-class WeekStartSheet extends StatefulWidget {
-  const WeekStartSheet({super.key});
+// class WeekStartSheet extends StatefulWidget {
+//   const WeekStartSheet({super.key});
 
-  @override
-  State<WeekStartSheet> createState() => _WeekStartSheetState();
-}
+//   @override
+//   State<WeekStartSheet> createState() => _WeekStartSheetState();
+// }
 
-class _WeekStartSheetState extends State<WeekStartSheet> {
+// class _WeekStartSheetState extends State<WeekStartSheet> {
 
 
-  final ValueNotifier<int> _currentIndex = ValueNotifier(
-    settings.get(weekStartKey, defaultValue: 0),
-  );
+//   final ValueNotifier<int> _currentIndex = ValueNotifier(
+//     settings.get(weekStartKey, defaultValue: 0),
+//   );
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AppConsts.pSide),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            spacing: 10,
-            children: [
-              SvgBuild(
-                assetImage: Assets.arrowLeft,
-                colorFilter: ColorFilter.mode(
-                  context.onPrimary,
-                  BlendMode.srcIn,
-                ),
-              ),
-              Text(
-                "Week Start On",
-                style: context.bodyLarge?.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 30),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: List.generate(startWeekdays.length, (index) {
-              return ValueListenableBuilder(
-                valueListenable: _currentIndex,
-                builder: (context, value, child) {
-                  return _ThemeButton(
-                    title: startWeekdays[index],
-                    isSelected: value == index,
-                    onTap: () {
-                      _currentIndex.value = index;
-                      settings.put(weekStartKey, _currentIndex.value);
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.all(AppConsts.pSide),
+//       child: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Row(
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             mainAxisAlignment: MainAxisAlignment.start,
+//             spacing: 10,
+//             children: [
+//               SvgBuild(
+//                 assetImage: Assets.arrowLeft,
+//                 colorFilter: ColorFilter.mode(
+//                   context.onPrimary,
+//                   BlendMode.srcIn,
+//                 ),
+//               ),
+//               Text(
+//                 "Week Start On",
+//                 style: context.bodyLarge?.copyWith(
+//                   fontWeight: FontWeight.w500,
+//                 ),
+//               ),
+//             ],
+//           ),
+//           const SizedBox(height: 30),
+//           Column(
+//             mainAxisSize: MainAxisSize.min,
+//             children: List.generate(startWeekdays.length, (index) {
+//               return ValueListenableBuilder(
+//                 valueListenable: _currentIndex,
+//                 builder: (context, value, child) {
+//                   return _ThemeButton(
+//                     title: startWeekdays[index],
+//                     isSelected: value == index,
+//                     onTap: () {
+//                       _currentIndex.value = index;
+//                       settings.put(weekStartKey, _currentIndex.value);
 
-                      Navigator.pop(context);
-                    },
-                  );
-                },
-              );
-            }),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//                       Navigator.pop(context);
+//                     },
+//                   );
+//                 },
+//               );
+//             }),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-class _ThemeButton extends StatelessWidget {
-  const _ThemeButton({
-    required this.title,
-    required this.isSelected,
-    this.onTap,
-  });
+// class _ThemeButton extends StatelessWidget {
+//   const _ThemeButton({
+//     required this.title,
+//     required this.isSelected,
+//     this.onTap,
+//   });
 
-  final String title;
-  final bool isSelected;
-  final void Function()? onTap;
+//   final String title;
+//   final bool isSelected;
+//   final void Function()? onTap;
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: AppConsts.pSmall),
-        padding: const EdgeInsetsDirectional.only(
-          start: 10,
-          end: 10,
-          top: 12,
-          bottom: 12,
-        ),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              AppConsts.rSmall,
-            ),
-            color: context.secondary,
-            border: Border.all(
-              width: 1,
-              color: isSelected ? context.onPrimary : Colors.transparent,
-            )),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: context.bodyLarge?.copyWith(
-                fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
-              ),
-            ),
-            if (isSelected)
-              SvgBuild(
-                assetImage: Assets.tick,
-              )
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: onTap,
+//       child: Container(
+//         margin: const EdgeInsets.only(bottom: AppConsts.pSmall),
+//         padding: const EdgeInsetsDirectional.only(
+//           start: 10,
+//           end: 10,
+//           top: 12,
+//           bottom: 12,
+//         ),
+//         decoration: BoxDecoration(
+//             borderRadius: BorderRadius.circular(
+//               AppConsts.rSmall,
+//             ),
+//             color: context.secondary,
+//             border: Border.all(
+//               width: 1,
+//               color: isSelected ? context.onPrimary : Colors.transparent,
+//             )),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//           children: [
+//             Text(
+//               title,
+//               style: context.bodyLarge?.copyWith(
+//                 fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
+//               ),
+//             ),
+//             if (isSelected)
+//               SvgBuild(
+//                 assetImage: Assets.tick,
+//               )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

@@ -1,31 +1,29 @@
 enum Weekday {
+  sun,
   mon,
   tue,
   wed,
   thu,
   fri,
   sat,
-  sun,
 }
-
-final List<String> startWeekdays = ["Sunday", "Monday", "Saturday"];
 
 String getAbbreviation(Weekday day) {
   switch (day) {
     case Weekday.mon:
-      return 'Mu';
+      return 'M';
     case Weekday.tue:
-      return 'Tu';
+      return 'T';
     case Weekday.wed:
-      return 'We';
+      return 'W';
     case Weekday.thu:
-      return 'Th';
+      return 'T';
     case Weekday.fri:
-      return 'Fr';
+      return 'F';
     case Weekday.sat:
-      return 'Sa';
+      return 'S';
     case Weekday.sun:
-      return 'Su';
+      return 'S';
   }
 }
 

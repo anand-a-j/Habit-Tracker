@@ -14,7 +14,7 @@ void main() async {
   await HiveService.init();
   await NotificationService.init();
   runApp(
-    ProviderScope(
+    const ProviderScope(
       child: MyApp(),
     ),
   );
@@ -32,18 +32,21 @@ class MyApp extends StatelessWidget {
         ],
       ),
       builder: (context, value, child) {
-        final ThemeMode themeMode = ThemeMode.values[value.get(
-          themeModeKey,
-          defaultValue: 0,
-        )];
+
+        // TODO: Light theme after version 1 release
+        // final ThemeMode themeMode = ThemeMode.values[value.get(
+        //   themeModeKey,
+        //   defaultValue: 0,
+        // )];
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           //
           routerConfig: router,
-          themeMode: themeMode,
+          themeMode: ThemeMode.dark,
           scaffoldMessengerKey: Snack.messengerKey,
           title: AppConsts.appName,
           darkTheme: AppThemes.darkThemeData(context),
+          
         );
       },
     );

@@ -1,1 +1,1 @@
-enum HabitCardType { week, month }
+enum HabitCardType { day,week ,year }

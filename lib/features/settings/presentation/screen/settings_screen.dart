@@ -10,7 +10,6 @@ import 'package:habitroot/features/settings/presentation/widgets/settings_card.d
 import '../../../../core/components/core_components.dart';
 import '../../../../core/utils/snackbar_manager.dart';
 import '../../../premium/presentation/widgets/app_premium_tile.dart';
-import '../widgets/theme_sheet.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -37,18 +36,21 @@ class SettingsScreen extends StatelessWidget {
           //     context.pushNamed('general-screen');
           //   },
           // ),
-          SettingsCard(
-            leadingIcon: Assets.theme,
-            title: "Theme",
-            isFirst: true,
-            onTap: () {
-              showThemeBottomSheet(context);
-              // context.pushNamed('theme-screen');
-            },
-          ),
+
+          // TODO: Light Theme after v1 release
+          // SettingsCard(
+          //   leadingIcon: Assets.theme,
+          //   title: "Theme",
+          //   isFirst: true,
+          //   onTap: () {
+          //     showThemeBottomSheet(context);
+          //     // context.pushNamed('theme-screen');
+          //   },
+          // ),
           SettingsCard(
             leadingIcon: Assets.archive,
             title: arcivedHabitsEn,
+            isFirst: true,
             onTap: () {
               context.pushNamed('archive-screen');
             },
@@ -78,14 +80,16 @@ class SettingsScreen extends StatelessWidget {
             leadingIcon: Assets.newspaper,
             title: termsOfUseEn,
           ),
+
           SettingsCard(
             leadingIcon: Assets.star,
             title: rateTheAppEn,
           ),
-          SettingsCard(
-            leadingIcon: Assets.externalLink,
-            title: shareTheAppEn,
-          ),
+          // TODO : after V1 release
+          // SettingsCard(
+          //   leadingIcon: Assets.externalLink,
+          //   title: shareTheAppEn,
+          // ),
           GestureDetector(
             onTap: () async {
               try {

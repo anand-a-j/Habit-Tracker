@@ -62,11 +62,8 @@ class _PremiumPlanListviewState extends State<PremiumPlanListview> {
   }
 }
 
-// ---
-
 class _PremiumPlanTile extends StatelessWidget {
   const _PremiumPlanTile({
-    super.key,
     required this.title,
     required this.subTitle,
     required this.offerTitle,

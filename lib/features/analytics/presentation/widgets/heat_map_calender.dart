@@ -10,9 +10,11 @@ class HeatMapCalender extends StatelessWidget {
   const HeatMapCalender({
     super.key,
     required this.habits,
+    required this.primaryColor
   });
 
   final List<Habit> habits;
+  final Color primaryColor;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class HeatMapCalender extends StatelessWidget {
         startDate: DateTime.now().subtract(const Duration(days: 365 * 2)),
         endDate: DateTime.now(),
         events: StatsUtils.getCalendarEvents(habits),
+        baseColor: primaryColor,
       ),
     );
   }

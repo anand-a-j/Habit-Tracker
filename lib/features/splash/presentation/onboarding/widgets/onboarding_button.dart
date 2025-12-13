@@ -22,7 +22,7 @@ class OnboardingButton extends StatelessWidget {
           vertical: AppConsts.pSide,
         ),
         child: SizedBox(
-          height: 56,
+          height: 49,
           width: double.infinity,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(

@@ -23,11 +23,11 @@ class HabitRootButton extends StatelessWidget {
         width: double.infinity,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            foregroundColor: Theme.of(context).colorScheme.onPrimary,
+            backgroundColor: Theme.of(context).colorScheme.onPrimary,
+            foregroundColor: Theme.of(context).colorScheme.secondary,
             elevation: 0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(50),
             ),
           ),
           onPressed: () {
@@ -38,6 +38,7 @@ class HabitRootButton extends StatelessWidget {
             label,
             style: context.titleMedium?.copyWith(
               fontWeight: FontWeight.w500,
+              color: context.secondary,
             ),
             textAlign: TextAlign.center,
           ),

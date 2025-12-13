@@ -50,7 +50,6 @@ class PremiumFooter extends StatelessWidget {
 
 class _FooterLinkText extends StatelessWidget {
   const _FooterLinkText({
-    super.key,
     required this.title,
     this.onTap,
   });

@@ -5,7 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habitroot/core/constants/constants.dart';
 import 'package:habitroot/core/extension/common.dart';
+import 'package:habitroot/core/theme/app_color_scheme.dart';
 import 'package:habitroot/features/analytics/presentation/utils/stats_utils.dart';
+import 'package:habitroot/features/analytics/presentation/widgets/analytics_habit_info.dart';
 import 'package:habitroot/features/analytics/presentation/widgets/overall_info_card.dart';
 
 import '../../../../core/components/core_components.dart';
@@ -81,6 +83,10 @@ class AnalyticsScreen extends ConsumerWidget {
         ),
         physics: const BouncingScrollPhysics(),
         children: [
+          if (isSingle) ...[
+            AnalyticsHabitInfo(habit: habit!),
+            const SizedBox(height: AppConsts.pMedium),
+          ],
           StrengthCard(
             strength: StatsUtils.calOverallStrength(displayHabits),
           ),
@@ -134,7 +140,11 @@ class AnalyticsScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: AppConsts.pMedium),
-          HeatMapCalender(habits: displayHabits),
+          HeatMapCalender(
+            habits: displayHabits,
+            primaryColor:
+                isSingle ? Color(habit!.color) : AppColorScheme.primary,
+          ),
           const SizedBox(height: AppConsts.pSide),
           // Text(
           //   "Average Strength",

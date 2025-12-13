@@ -10,13 +10,14 @@ import 'package:habitroot/core/extension/common.dart';
 import 'package:habitroot/core/extension/habit_extension.dart';
 import 'package:habitroot/features/calendar/domain/calendar_event.dart';
 import 'package:habitroot/features/calendar/presentation/heap_map_calendar.dart';
+import 'package:habitroot/features/home/presentation/widgets/habit_heap_card/habit_card_week_mode.dart';
 import 'package:hive_ce_flutter/adapters.dart';
 
-import '../../../../core/enum/habit_card_type.dart';
-import '../../../../routes/routes.dart';
-import '../../../habit/presentation/provider/habit_provider.dart';
-import '../components/habit_details_bottom_sheet.dart';
-import 'habit_mark_button.dart';
+import '../../../../../core/enum/habit_card_type.dart';
+import '../../../../../routes/routes.dart';
+import '../../../../habit/presentation/provider/habit_provider.dart';
+import '../../components/habit_details_bottom_sheet.dart';
+import '../habit_mark_button.dart';
 
 final heapCardHabitId = Provider<String>((ref) => throw UnimplementedError());
 
@@ -132,8 +133,10 @@ class HabitHeapCard extends ConsumerWidget {
                     )];
 
                     Widget content;
-                    if (HabitCardType.week == habitCardType) {
+                    if (HabitCardType.day == habitCardType) {
                       content = const SizedBox.shrink();
+                    } else if (HabitCardType.week == habitCardType) {
+                      content = HabitCardWeekMode(habit: habit);
                     } else {
                       content = Column(
                         key: const ValueKey("month_view"),
@@ -174,44 +177,3 @@ class HabitHeapCard extends ConsumerWidget {
     );
   }
 }
-
-// class _HabitMarkButton extends ConsumerWidget {
-//   const _HabitMarkButton({
-//     required this.backgroundColor,
-//     required this.habitId,
-//   });
-
-//   final Color backgroundColor;
-//   final String habitId;
-
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     final isCompletedToday = ref.watch(
-//       habitByIdProvider(habitId).select((h) => h.isCompletedToday),
-//     );
-
-//     return GestureDetector(
-//       onTap: () {
-//         HapticFeedback.lightImpact();
-//         final habit = ref.read(habitByIdProvider(habitId));
-//         final updatedHabit = habit.toggleCompleted();
-//         ref.read(habitProvider.notifier).updateHabit(updatedHabit);
-//       },
-//       child: AnimatedContainer(
-//         duration: const Duration(milliseconds: 250),
-//         curve: Curves.easeInOut,
-//         width: 40,
-//         height: 40,
-//         decoration: BoxDecoration(
-//           color: isCompletedToday
-//               ? backgroundColor
-//               : backgroundColor.withValues(alpha: 0.2),
-//           borderRadius: BorderRadius.circular(AppConsts.rMacro),
-//         ),
-//         child: const Center(
-//           child: SvgBuild(assetImage: Assets.tick),
-//         ),
-//       ),
-//     );
-//   }
-// }
