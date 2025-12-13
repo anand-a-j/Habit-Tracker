@@ -22,7 +22,7 @@
 
 </queries>
     <application
-        android:label="hahit_root"
+        android:label="HabitBud"
         android:name="${applicationName}"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher">

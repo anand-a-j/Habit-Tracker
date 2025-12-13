@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class AppConsts {
   static const String appName = "HabitBud";
 
